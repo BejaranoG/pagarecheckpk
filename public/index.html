@@ -497,7 +497,7 @@ function buildPromptDatos(C, P, today) {
     + '  b) Si existe un plazo máximo por disposición (frases como "plazo máximo de X días", "vencimiento máximo de X días", "cada disposición tendrá un plazo máximo de").\n'
     + '- Del PAGARÉ extrae la(s) fecha(s) de suscripción y vencimiento de las amortizaciones.\n'
     + '- VERIFICACIÓN 1 — Plazo máximo por disposición: Si el contrato establece un plazo máximo por disposición (ej: 180 días), calcula los días entre la fecha de suscripción del pagaré y cada fecha de amortización. Si alguna amortización SUPERA ese plazo máximo: marca como DISCREPANCIA URGENTE con el número de días calculado.\n'
-    + '- VERIFICACIÓN 2 — Vencimiento del contrato: Si el contrato tiene fecha de vencimiento general, verifica que NINGUNA amortización sea POSTERIOR a esa fecha. Si alguna lo supera: marca como DISCREPANCIA URGENTE señalando la fecha del contrato y la fecha de la amortización conflictiva.\n'
+    + '- VERIFICACIÓN 2 — Vencimiento del contrato: Si el contrato tiene fecha de vencimiento general, verifica que NINGUNA amortización sea POSTERIOR a esa fecha. Si alguna amortización vence EN LA MISMA FECHA que el contrato, esto es VÁLIDO y no es error. Solo marca como DISCREPANCIA URGENTE si una amortización vence DESPUÉS (es decir, fecha estrictamente mayor) a la fecha de vencimiento del contrato.\n'
     + '- Si ambas verificaciones son correctas: marca como OK.\n'
     + '- Si no se puede localizar la cláusula de vencimiento: indicar como ADVERTENCIA.\n\n'
     + 'Responde SOLO JSON válido sin markdown:\n'
