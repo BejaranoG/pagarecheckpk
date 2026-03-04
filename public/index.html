@@ -417,7 +417,7 @@ async function startAnalysis() {
   document.getElementById('progress-wrap').classList.add('visible');
   document.getElementById('results-wrap').classList.remove('visible');
 
-  var C     = docs.contrato.text.substring(0, 100000);
+  var C     = docs.contrato.text.substring(0, 50000);
   var P     = docs.pagare.text.substring(0, 30000);
   var E     = docs.excel ? docs.excel.text.substring(0, 75000) : 'No se proporcionó carátula Excel.';
   var today = new Date().toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
@@ -426,14 +426,17 @@ async function startAnalysis() {
     setProgress(15, 'Analizando datos del pagaré (puntos 1, 2, 4, 5, 6 y 8)...');
     var rDatos = await callAI(buildPromptDatos(C, P, today));
     renderFindings('body-datos', rDatos.findings);
+    await sleep(3000);
 
     setProgress(45, 'Revisando partes, firmas y avales (puntos 3 y 10)...');
     var rPartes = await callAI(buildPromptPartes(C, P));
     renderFindings('body-partes', rPartes.findings);
+    await sleep(3000);
 
     setProgress(70, 'Cotejando tabla de amortizaciones (puntos 7 y 9)...');
     var rAmort = await callAI(buildPromptAmort(C, P, E));
     renderFindings('body-amort', rAmort.findings);
+    await sleep(3000);
 
     setProgress(90, 'Generando dictamen final...');
     var rRes = await callAI(buildPromptResumen(C, P, E, today));
@@ -563,7 +566,7 @@ async function callAI(prompt) {
     method: 'POST',
     headers: headers,
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 4000,
       messages: [{ role: 'user', content: prompt }]
     })
