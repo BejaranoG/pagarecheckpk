@@ -52,4 +52,3 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log('Servidor corriendo en puerto ' + PORT);
   console.log('API Key: ' + (process.env.ANTHROPIC_API_KEY ? 'OK' : 'NO CONFIGURADA'));
 });
-Listo
