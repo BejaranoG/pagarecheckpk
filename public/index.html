@@ -556,10 +556,8 @@ function buildPromptResumen(C, P, E, today) {
 
 // ── API CALL ───────────────────────────────────────────────────────────────
 async function callAI(prompt) {
-  var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  var endpoint = isLocal ? '/api/analyze' : 'https://api.anthropic.com/v1/messages';
+  var endpoint = '/api/analyze';
   var headers = { 'Content-Type': 'application/json' };
-  if (!isLocal) headers['anthropic-version'] = '2023-06-01';
 
   var resp = await fetch(endpoint, {
     method: 'POST',
