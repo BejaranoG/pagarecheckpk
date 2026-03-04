@@ -417,7 +417,7 @@ async function startAnalysis() {
   document.getElementById('progress-wrap').classList.add('visible');
   document.getElementById('results-wrap').classList.remove('visible');
 
-  var C     = docs.contrato.text.substring(0, 50000);
+  var C     = docs.contrato.text.substring(0, 75000);
   var P     = docs.pagare.text.substring(0, 30000);
   var E     = docs.excel ? docs.excel.text.substring(0, 75000) : 'No se proporcionó carátula Excel.';
   var today = new Date().toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
